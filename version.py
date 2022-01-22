@@ -1,0 +1,1 @@
+VERSION="bs-playlist-by-tags/0.1.0"
