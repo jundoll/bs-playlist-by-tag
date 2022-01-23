@@ -7,15 +7,61 @@ import BSAPI.beatsaver as beatsaver
 async def main():
 
     # tags
-    tags = ['tech', 'danceStyle', 'speed', 'balanced', 'challenge', 'accuracy', 'fitness', 'swing', 'nightcore', 'folk', 'family', 'ambient', 'funk', 'jazz', 'classical',
-            'soul', 'speedcore', 'punk', 'rb', 'holiday', 'vocaloid', 'jrock', 'trance', 'drumbass', 'Comedy', 'Instrumental', 'Hardcore', 'KPop', 'Indie', 'Techno', 'House', 'Game', 'Film', 'Alt', 'Dubstep', 'Metal', 'Anime', 'HipHop', 'JPop', 'Dance', 'Rock', 'Pop', 'Electronic']
+    TAGS = {
+        'genre1': [
+            'accuracy',
+            'balanced',
+            'challenge',
+            'dance-style',
+            'fitness',
+            'speed',
+            'tech'
+        ],
+        'genre2': [
+            'alternative',
+            'ambient',
+            'anime',
+            'classical-orchestral',
+            'comedy-meme',
+            'dance',
+            'drum-and-bass',
+            'dubstep',
+            'electronic',
+            'folk-acoustic',
+            'funk-disco',
+            'hardcore',
+            'hip-hop-rap',
+            'holiday',
+            'house',
+            'indie',
+            'instrumental',
+            'j-pop',
+            'j-rock',
+            'jazz',
+            'k-pop',
+            'kids-family',
+            'metal',
+            'nightcore',
+            'pop',
+            'punk',
+            'rb',
+            'rock',
+            'soul',
+            'speedcore',
+            'swing',
+            'tv-movie-soundtrack',
+            'techno',
+            'trance',
+            'video-game-soundtrack',
+            'vocaloid'
+        ]
+    }
 
     # make playlist
-    for tag in tags:
+    for tag in sum(TAGS.values(), []):
 
         # init
         page = -1
-        IDs = []
         songs = []
 
         while(True):
@@ -29,18 +75,15 @@ async def main():
 
             # set songs
             if searchResponse is not None:
-                print(searchResponse.docs)
-                if (searchResponse.docs is not None) and len(searchResponse.docs) > 0:
+                if (searchResponse.docs is not None) and (len(searchResponse.docs) > 0):
                     # get
-                    IDs += [x.id for x in searchResponse.docs]
                     songs += [{
                         "songName": x.metadata.songName,
-                        "levelAuthorName": x.metadata.songAuthorName,
+                        "levelAuthorName": x.metadata.levelAuthorName,
                         "hash": x.versions[0].hash,
                         "levelid": f"custom_level_{x.versions[0].hash}"
-                    } for x in searchResponse.docs]
+                    } for x in searchResponse.docs if (x.metadata is not None) and (x.versions is not None)]
                 else:
-                    print(1)
                     break
             else:
                 break
@@ -57,9 +100,7 @@ async def main():
         fname = f'tag_{tag}.bplist'
         playlist = {
             "customData": {
-                "syncURL": f"https://github.com/jundoll/bs-playlist-by-tags/releases/latest/download/{fname}",
-                "weighting": 20,
-                "customPassText": None
+                "syncURL": f"https://github.com/jundoll/bs-playlist-by-tag/releases/latest/download/{fname}"
             },
             "playlistTitle": f"tag_{tag}",
             "playlistAuthor": "",
