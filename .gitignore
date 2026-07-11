@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # original
-imgs/*.png
+imgs/*
+!imgs/sync.png
 out/

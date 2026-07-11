@@ -1,3 +1,6 @@
+[![BUILD](https://github.com/jundoll/bs-playlist-by-tag/actions/workflows/main.yml/badge.svg)](https://github.com/jundoll/bs-playlist-by-tag/actions/workflows/main.yml)
+[![Github All Releases](https://img.shields.io/github/downloads/jundoll/bs-playlist-by-tag/total.svg)](https://github.com/jundoll/bs-playlist-by-tag/releases)
+
 # bs-playlist-by-tag
 
  - タグ別プレイリストです
